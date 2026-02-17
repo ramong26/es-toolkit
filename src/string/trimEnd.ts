@@ -36,6 +36,7 @@ export function trimEnd(str: string, chars?: string | string[]): string {
       while (endIndex > 0 && chars.includes(str[endIndex - 1])) {
         endIndex--;
       }
+      break;
     }
   }
 

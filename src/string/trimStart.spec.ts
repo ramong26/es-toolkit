@@ -65,4 +65,8 @@ describe('trimStart', () => {
   it('should remove leading spaces and other characters when specified in an array', () => {
     expect(trimStart('   hello world', [' ', 'h'])).toEqual('ello world');
   });
+
+  it('should throw an error when chars is a string with multiple characters', () => {
+    expect(() => trimStart('hello', 'ab')).toThrow(`The 'chars' parameter should be a single character string.`);
+  });
 });
