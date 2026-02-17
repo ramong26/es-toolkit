@@ -14,15 +14,30 @@
  * isDeepKey(123) // false
  * isDeepKey('a.b.c') // true
  * isDeepKey('a[b][c]') // true
+ * isDeepKey('a.') // false
+ * isDeepKey('.a') // false
+ * isDeepKey('a[b') // false
+ * isDeepKey('a]b]') // false
+ * isDeepKey('a][b') // false
  */
 export function isDeepKey(key: PropertyKey): boolean {
-  switch (typeof key) {
-    case 'number':
-    case 'symbol': {
-      return false;
-    }
-    case 'string': {
-      return key.includes('.') || key.includes('[') || key.includes(']');
-    }
+  if (typeof key === 'number' || typeof key === 'symbol') {
+    return false;
   }
+
+  if (typeof key === 'string') {
+    const dotIndex = key.indexOf('.');
+    if (dotIndex > 0 && dotIndex < key.length - 1) {
+      return true;
+    }
+
+    let leftBracketIndex = key.indexOf('[');
+    let rightBracketIndex = key.indexOf(']');
+    if (leftBracketIndex !== -1 && rightBracketIndex !== -1 && leftBracketIndex < rightBracketIndex) {
+      return true;
+    }
+
+    return false;
+  }
+  return false;
 }
