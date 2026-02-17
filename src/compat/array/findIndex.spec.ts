@@ -65,6 +65,10 @@ describe('findIndex', () => {
     expect(findIndex(undefined, 'a')).toBe(-1);
   });
 
+  it('should return -1 when doesMatch is null', () => {
+    expect(findIndex(objects, null as any)).toBe(-1);
+  });
+
   it('should support array-like objects', () => {
     expect(findIndex({ 0: 'a', 1: 'b', length: 2 }, i => i === 'b')).toBe(1);
     expect(findIndex('123', i => i === '2')).toBe(1);

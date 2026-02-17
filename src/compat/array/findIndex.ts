@@ -38,6 +38,9 @@ export function findIndex<T>(
       break;
     }
     case 'object': {
+      if (doesMatch === null) {
+        break;
+      }
       if (Array.isArray(doesMatch) && doesMatch.length === 2) {
         const key = doesMatch[0];
         const value = doesMatch[1];
